@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Net;
 using yahoo;
 
@@ -22,17 +23,19 @@ using (var reader = new StreamReader($"{Environment.CurrentDirectory}/../../../t
     }*/
 }
 
-CancellationTokenSource cancelTokenSource = new CancellationTokenSource();
-CancellationToken token = cancelTokenSource.Token;
+
+//CancellationToken token = cancelTokenSource.Token;
 
 var tasks = new Task<KeyValuePair<string, decimal>>[quotations.Count];
 var size = 0;
 var res = new List<decimal>();
 foreach (var action in quotations)
 {
-    var t1 = Task.Run(() =>
+    var cancelTokenSource = new CancellationTokenSource();
+    Task<KeyValuePair<string, string>> t1 = null!;
+    t1 = Task.Run(() =>
     {
-        string response;
+        string response = "";
         while (true)
         {
             try
@@ -45,7 +48,11 @@ foreach (var action in quotations)
                 if (e.StatusCode == HttpStatusCode.NotFound)
                 {
                     Console.WriteLine($"{e.Message}  {action}");
-                    cancelTokenSource.Cancel();
+                    //cancelTokenSource.Cancel();
+                    break;
+                    //throw new TaskCanceledException(t1);
+                    
+                    //return KeyValuePair.Create("", (decimal)0);
                 }
                 Console.WriteLine($"{e.Message}  {action}");
                 Thread.Sleep(10000);
@@ -53,14 +60,19 @@ foreach (var action in quotations)
         }
 
         return KeyValuePair.Create(action,response);
-    }, token);
+    });
     tasks[size++] = t1.ContinueWith(t =>
     {
+        if (t.IsFaulted)
+        {
+            cancelTokenSource.Cancel();
+            
+        }
         var dec = Yahoo.MeanYearly(t.Result.Value);
         Console.WriteLine($"{t.Result.Key} : {dec:f4}");
         res.Add(dec);
         return KeyValuePair.Create(t.Result.Key, dec);
-    });
+    }, TaskContinuationOptions.OnlyOnFaulted);
     Thread.Sleep(11);
 }
 
@@ -70,6 +82,17 @@ foreach (var action in quotations)
 //Console.WriteLine(temp);  
 //Console.WriteLine(sum);
 
-
+/*while (true)
+{
+    try
+    {
+        Task.WaitAll(tasks);
+        break;
+    }
+    catch (Exception e)
+    {
+        continue;
+    }
+}*/
 Task.WaitAll(tasks);
 Console.WriteLine(res.Count);

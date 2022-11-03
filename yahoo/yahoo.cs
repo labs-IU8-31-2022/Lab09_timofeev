@@ -1,6 +1,4 @@
-﻿using System.Net;
-
-namespace yahoo;
+﻿namespace yahoo;
 
 class Yahoo
 {
