@@ -1,4 +1,4 @@
-name: FinanceGet
+name: Finance Yahoo
 on: [workflow_dispatch]
 
 jobs:
