@@ -1,0 +1,28 @@
+name: FinanceGet
+on: [workflow_dispatch]
+
+jobs:
+  GetWeather:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v3
+
+      - name: Build
+        run: dotnet build
+
+      - name: Run
+        run: |
+          cd yahoo/bin/Debug/net6.0
+          dotnet weather.dll  
+
+      - name: Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Finance
+          path: ./yahoo/result.txt
