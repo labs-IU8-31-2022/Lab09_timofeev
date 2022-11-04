@@ -1,6 +1,8 @@
+using System.Globalization;
 using System.Net;
 using yahoo;
 
+CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("ru-RU");
 
 var quotations = new List<string>();
 var waitHandler = new AutoResetEvent(true);

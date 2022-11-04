@@ -21,17 +21,14 @@ class Yahoo
             return null;
         }
 
-        var size = data
-            .Split('\n')
-            .Count(line => !line.Contains("null"));
         var sum = data
             .Split('\n')
             .Select(line => line.Split(','))
             .Where(numbers => numbers[0] != "Date" && !numbers.Contains("null"))
             .Sum(numbers => (Convert.ToDecimal(numbers[2].Replace('.', ',')) +
                              Convert.ToDecimal(numbers[3].Replace('.', ','))) / 2);
-        var res = sum / size;
-        Console.WriteLine($"{size} {sum} {res}");
-        return res;
+        return sum / data
+            .Split('\n')
+            .Count(line => !line.Contains("null"));
     }
 }
