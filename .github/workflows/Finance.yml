@@ -19,7 +19,7 @@ jobs:
       - name: Run
         run: |
           cd yahoo/bin/Debug/net6.0
-          dotnet weather.dll  
+          dotnet yahoo.dll  
 
       - name: Artifacts
         uses: actions/upload-artifact@v3
