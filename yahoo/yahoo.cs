@@ -30,6 +30,7 @@ class Yahoo
             .Where(numbers => numbers[0] != "Date" && !numbers.Contains("null"))
             .Sum(numbers => (Convert.ToDecimal(numbers[2].Replace('.', ',')) +
                              Convert.ToDecimal(numbers[3].Replace('.', ','))) / 2);
-        return sum / size;
+        var res = sum / size;
+        return res;
     }
 }
