@@ -31,6 +31,7 @@ class Yahoo
             .Sum(numbers => (Convert.ToDecimal(numbers[2].Replace('.', ',')) +
                              Convert.ToDecimal(numbers[3].Replace('.', ','))) / 2);
         var res = sum / size;
+        Console.WriteLine($"{size} {sum} {res}");
         return res;
     }
 }
