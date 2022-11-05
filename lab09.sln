@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "yahoo", "yahoo\yahoo.csproj", "{32AC899A-6C34-4D4F-B504-275B6299AC01}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weather", "Weather\Weather.csproj", "{537E3150-CC61-4B21-812F-457ED8F33FBA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{32AC899A-6C34-4D4F-B504-275B6299AC01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32AC899A-6C34-4D4F-B504-275B6299AC01}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32AC899A-6C34-4D4F-B504-275B6299AC01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{537E3150-CC61-4B21-812F-457ED8F33FBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{537E3150-CC61-4B21-812F-457ED8F33FBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{537E3150-CC61-4B21-812F-457ED8F33FBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{537E3150-CC61-4B21-812F-457ED8F33FBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
