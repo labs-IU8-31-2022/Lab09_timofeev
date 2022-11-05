@@ -62,7 +62,7 @@ namespace Weather
             //MessageBox.Show("Города получены.");
         }
 
-        private async void GetApi(object sender, RoutedEventArgs e)
+        private void GetApi(object sender, RoutedEventArgs e)
         {
             if (SelectedCity.Name is null)
             {
@@ -71,18 +71,24 @@ namespace Weather
             }
 
             Button1.IsEnabled = false;
+            Text1.Text = "Получение данных...";
             var res = Task.Run(() => WeatherBot.Weather.GetAsync(SelectedCity.Lat, SelectedCity.Lon).Result);
-            await res;
-            Text1.Text = $"Country: {res.Result.Country} City: {res.Result.Name} " +
-                         $"\nWeather: {res.Result.Description} \nTemperature: {res.Result.Temp}°C";
-            Button1.IsEnabled = true;
+            res.ContinueWith((t) =>
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    Text1.Text = $"Country: {res.Result.Country}   City: {res.Result.Name} " +
+                                 $"\nWeather: {res.Result.Description} \nTemperature: {res.Result.Temp}°C";
+                    Button1.IsEnabled = true;
+                });
+            });
         }
 
-        private int count;
+        private int _count;
 
         private void Count(object sender, RoutedEventArgs e)
         {
-            Button3.Content = $"{++count} click";
+            Text2.Text = $"{++_count} click";
         }
 
         public struct City
