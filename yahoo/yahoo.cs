@@ -1,6 +1,6 @@
 ﻿namespace yahoo;
 
-class Yahoo
+internal static class Yahoo
 {
     public static string GetData(string quotation)
     {
