@@ -29,6 +29,6 @@ internal static class Yahoo
                              Convert.ToDecimal(numbers[3].Replace('.', ','))) / 2);
         return sum / data
             .Split('\n')
-            .Count(line => !line.Contains("null"));
+            .Count(line => !line.Contains("null") && !line.Contains("Date")) ;
     }
 }

@@ -77,8 +77,8 @@ namespace Weather
             {
                 Dispatcher.Invoke(() =>
                 {
-                    Text1.Text = $"Country: {res.Result.Country}   City: {res.Result.Name} " +
-                                 $"\nWeather: {res.Result.Description} \nTemperature: {res.Result.Temp}°C";
+                    Text1.Text = $"Country: {t.Result.Country}   City: {t.Result.Name} " +
+                                 $"\nWeather: {t.Result.Description} \nTemperature: {t.Result.Temp}°C";
                     Button1.IsEnabled = true;
                 });
             });
