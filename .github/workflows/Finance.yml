@@ -3,7 +3,7 @@ on: [workflow_dispatch]
 
 jobs:
   GetWeather:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     timeout-minutes: 30
     
     steps:
